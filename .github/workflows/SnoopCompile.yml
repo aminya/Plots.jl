@@ -50,9 +50,9 @@ jobs:
           julia --project -e 'using Pkg; Pkg.instantiate();'
           julia -e 'using Pkg; Pkg.add(PackageSpec(url = "https://github.com/aminya/SnoopCompile.jl", rev = "multios")); Pkg.develop(PackageSpec(; path=pwd())); Pkg.add("JuliaFormatter"); using SnoopCompile; SnoopCompile.addtestdep();'
       - name: Generating precompile files
-        run: julia --project -e 'include("deps/SnoopCompile/snoopi_bot.jl")'
+        run: xvfb-run julia --project -e 'include("deps/SnoopCompile/snoopi_bot.jl")'
       - name: Running Benchmark
-        run: julia --project -e 'include("deps/SnoopCompile/snoopi_bench.jl")'
+        run: xvfb-run julia --project -e 'include("deps/SnoopCompile/snoopi_bench.jl")'
       - name: Format precompile_includer.jl
         run: julia --project -e 'using JuliaFormatter; format_file("src/precompile_includer.jl")'
       - name: Upload all
