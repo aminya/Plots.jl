@@ -16,6 +16,7 @@ jobs:
     if: "!contains(github.event.head_commit.message, '[skip ci]')"
     runs-on: ${{ matrix.os }}
     strategy:
+      fail-fast: false
       matrix:
         # Uncomment other versions if you want multi-version signatures (should exactly match BotConfig.version):
         version:
