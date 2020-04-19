@@ -36,7 +36,8 @@ jobs:
       - uses: julia-actions/setup-julia@latest
         with:
           version: ${{ matrix.julia-version }}
-      - run: ./test/install_wkhtmltoimage.sh
+      - if: startsWith(matrix.os,'ubuntu')
+        run: ./test/install_wkhtmltoimage.sh
       - name: Install dependencies
         run: |
           julia --project -e 'using Pkg; Pkg.instantiate();'
