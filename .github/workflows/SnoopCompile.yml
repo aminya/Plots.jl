@@ -18,7 +18,8 @@ jobs:
     
     env:
       GKS_ENCODING: "utf8"
-
+      PLOTS_TEST: "true"
+      GKSwstype: "100"
     
     runs-on: ${{ matrix.os }}
     strategy:
@@ -30,7 +31,7 @@ jobs:
           - '1.2.0' # min
         # Uncomment other options if you want multi-os signatures (currently only these are supported by Github):
         os:
-          # - ubuntu-latest
+          - ubuntu-latest
           - windows-latest
           - macos-latest
         arch:
