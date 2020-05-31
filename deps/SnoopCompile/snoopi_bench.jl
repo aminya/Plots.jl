@@ -20,3 +20,4 @@ snoopi_bench(
   botconfig,
   "$(@__DIR__)/example_script.jl",
 )
+ 
