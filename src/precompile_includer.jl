@@ -12,17 +12,8 @@ elseif !ismultios && !ismultiversion
     _precompile_()
 else
     @static if Sys.islinux()
-        @static if v"1.3.0-DEV" <= VERSION <= v"1.3.9"
-            include("../deps/SnoopCompile/precompile/linux/1.3/precompile_Plots.jl")
-            _precompile_()
-        elseif v"1.4.0-DEV" <= VERSION <= v"1.4.9"
-            include("../deps/SnoopCompile/precompile/linux/1.4/precompile_Plots.jl")
-            _precompile_()
-        elseif v"1.5.0-DEV" <= VERSION <= v"1.5.9"
+        @static if v"1.5.0-DEV" <= VERSION <= v"1.5.9"
             include("../deps/SnoopCompile/precompile/linux/1.5/precompile_Plots.jl")
-            _precompile_()
-        elseif v"1.6.0-DEV" <= VERSION <= v"1.6.9"
-            include("../deps/SnoopCompile/precompile/linux/1.6/precompile_Plots.jl")
             _precompile_()
         else
             include("../deps/SnoopCompile/precompile/linux/1.4/precompile_Plots.jl")
@@ -30,53 +21,17 @@ else
         end
 
     elseif Sys.iswindows()
-        @static if v"1.3.0-DEV" <= VERSION <= v"1.3.9"
-            include("../deps/SnoopCompile/precompile/windows/1.3/precompile_Plots.jl")
-            _precompile_()
-        elseif v"1.4.0-DEV" <= VERSION <= v"1.4.9"
-            include("../deps/SnoopCompile/precompile/windows/1.4/precompile_Plots.jl")
-            _precompile_()
-        elseif v"1.5.0-DEV" <= VERSION <= v"1.5.9"
+        @static if v"1.5.0-DEV" <= VERSION <= v"1.5.9"
             include("../deps/SnoopCompile/precompile/windows/1.5/precompile_Plots.jl")
             _precompile_()
-        elseif v"1.6.0-DEV" <= VERSION <= v"1.6.9"
-            include("../deps/SnoopCompile/precompile/windows/1.6/precompile_Plots.jl")
-            _precompile_()
         else
             include("../deps/SnoopCompile/precompile/windows/1.4/precompile_Plots.jl")
-            _precompile_()
-        end
-
-    elseif Sys.isapple()
-        @static if v"1.3.0-DEV" <= VERSION <= v"1.3.9"
-            include("../deps/SnoopCompile/precompile/apple/1.3/precompile_Plots.jl")
-            _precompile_()
-        elseif v"1.4.0-DEV" <= VERSION <= v"1.4.9"
-            include("../deps/SnoopCompile/precompile/apple/1.4/precompile_Plots.jl")
-            _precompile_()
-        elseif v"1.5.0-DEV" <= VERSION <= v"1.5.9"
-            include("../deps/SnoopCompile/precompile/apple/1.5/precompile_Plots.jl")
-            _precompile_()
-        elseif v"1.6.0-DEV" <= VERSION <= v"1.6.9"
-            include("../deps/SnoopCompile/precompile/apple/1.6/precompile_Plots.jl")
-            _precompile_()
-        else
-            include("../deps/SnoopCompile/precompile/apple/1.4/precompile_Plots.jl")
             _precompile_()
         end
 
     else
-        @static if v"1.3.0-DEV" <= VERSION <= v"1.3.9"
-            include("../deps/SnoopCompile/precompile/linux/1.3/precompile_Plots.jl")
-            _precompile_()
-        elseif v"1.4.0-DEV" <= VERSION <= v"1.4.9"
-            include("../deps/SnoopCompile/precompile/linux/1.4/precompile_Plots.jl")
-            _precompile_()
-        elseif v"1.5.0-DEV" <= VERSION <= v"1.5.9"
+        @static if v"1.5.0-DEV" <= VERSION <= v"1.5.9"
             include("../deps/SnoopCompile/precompile/linux/1.5/precompile_Plots.jl")
-            _precompile_()
-        elseif v"1.6.0-DEV" <= VERSION <= v"1.6.9"
-            include("../deps/SnoopCompile/precompile/linux/1.6/precompile_Plots.jl")
             _precompile_()
         else
             include("../deps/SnoopCompile/precompile/linux/1.4/precompile_Plots.jl")
