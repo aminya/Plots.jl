@@ -219,7 +219,7 @@ gr_inqtext(x, y, s) = gr_inqtext(x, y, string(s))
 function gr_inqtext(x, y, s::AbstractString)
     if length(s) >= 2 && s[1] == '$' && s[end] == '$'
         GR.inqmathtex(x, y, s[2:end-1])
-    elseif findfirst(isequal('\\'), s) !== nothing || occursin("10^{", s)
+    elseif occursin('\\', s) || occursin("10^{", s)
         GR.inqtextext(x, y, s)
     else
         GR.inqtext(x, y, s)
@@ -231,7 +231,7 @@ gr_text(x, y, s) = gr_text(x, y, string(s))
 function gr_text(x, y, s::AbstractString)
     if length(s) >= 2 && s[1] == '$' && s[end] == '$'
         GR.mathtex(x, y, s[2:end-1])
-    elseif findfirst(isequal('\\'), s) !== nothing || occursin("10^{", s)
+    elseif occursin('\\', s) || occursin("10^{", s)
         GR.textext(x, y, s)
     else
         GR.text(x, y, s)
@@ -1432,12 +1432,11 @@ function gr_label_axis(sp, letter, viewport_plotarea)
     axis = sp[Symbol(letter, :axis)]
     # guide
     if axis[:guide] != ""
-        isy = letter === :y
         GR.savestate()
         gr_set_font(guidefont(axis), sp)
         guide_position = axis[:guide_position]
-        if isy
-            w = 0.02 + gr_axis_width(sp, axis)
+        if letter === :y
+            w = 0.03 + gr_axis_width(sp, axis)
             GR.setcharup(-1, 0)
             if guide_position == :right || (guide_position == :auto && axis[:mirror])
                 GR.settextalign(GR.TEXT_HALIGN_CENTER, GR.TEXT_VALIGN_BOTTOM)
@@ -1447,7 +1446,7 @@ function gr_label_axis(sp, letter, viewport_plotarea)
                 gr_text(viewport_plotarea[1] - w, gr_view_ycenter(viewport_plotarea), axis[:guide])
             end
         else
-            h = 0.01 + gr_axis_height(sp, axis)
+            h = 0.015 + gr_axis_height(sp, axis)
             if guide_position == :top || (guide_position == :auto && axis[:mirror])
                 GR.settextalign(GR.TEXT_HALIGN_CENTER, GR.TEXT_VALIGN_TOP)
                 gr_text(gr_view_xcenter(viewport_plotarea), viewport_plotarea[4] + h, axis[:guide])
@@ -1492,7 +1491,7 @@ function gr_label_axis_3d(sp, letter)
             x_offset = letter === :x ? -h : h
             y_offset = -h
         else
-            x_offset = -gr_axis_width(sp, ax)
+            x_offset = -0.03 - gr_axis_width(sp, ax)
             y_offset = 0
         end
         letter === :z && GR.setcharup(-1, 0)

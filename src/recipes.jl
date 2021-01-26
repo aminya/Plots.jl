@@ -268,15 +268,15 @@ end
         end
     end
     newx, newy = zeros(3n), zeros(3n)
-    newz = z!== nothing ? zeros(3n) : nothing
-    for i = 1:n
+    newz = z !== nothing ? zeros(3n) : nothing
+    for (i, (xi, yi, zi)) = enumerate(zip(x, y, z !== nothing ? z : 1:n))
         rng = (3i - 2):(3i)
-        newx[rng] = [x[i], x[i], NaN]
+        newx[rng] = [xi, xi, NaN]
         if z !== nothing
-            newy[rng] = [y[i], y[i], NaN]
-            newz[rng] = [_cycle(fr, i), z[i], NaN]
+            newy[rng] = [yi, yi, NaN]
+            newz[rng] = [_cycle(fr, i), zi, NaN]
         else
-            newy[rng] = [_cycle(fr, i), y[i], NaN]
+            newy[rng] = [_cycle(fr, i), yi, NaN]
         end
     end
     x := newx
@@ -1520,14 +1520,10 @@ end
     yflip := true
     aspect_ratio := 1
     rs, cs, zs = Plots.findnz(z.surf)
-    xlims := ignorenan_extrema(cs)
-    ylims := ignorenan_extrema(rs)
-    if plotattributes[:markershape] == :none
-        markershape := :circle
-    end
-    if plotattributes[:markersize] == default(:markersize)
-        markersize := 1
-    end
+    xlims := widen(ignorenan_extrema(cs)..., get(plotattributes, :xscale, :identity))
+    ylims := widen(ignorenan_extrema(rs)..., get(plotattributes, :yscale, :identity))
+    markershape --> :circle
+    markersize --> 1
     markerstrokewidth := 0
     if length(unique(zs)) == 1
         seriescolor --> :black
